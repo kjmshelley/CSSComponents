@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Components</title>
+
+    <style>
+        :root {
+            font-size: 10px;
+            --blue: #2196F3;
+            --light-blue: #87caff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body,
+        div,
+        h1,h2,h3,h4,h5,h6,
+        p,
+        a,
+        input [input="text"] {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family:Arial, Helvetica, sans-serif;
+            /* background-color: #424242; */
+            /* background: linear-gradient(226.13deg, rgba(154, 39, 174, 0.5) 0%, rgba(41, 142, 190, 0.5) 153.43%); */
+            background-color: #22143D;
+            margin-top: 25px;
+        }
+
+        #app {
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            padding: 3rem;
+        }
+
+        .title {
+            font-size: 4.5rem;
+            display: flex;
+            flex-direction: row;
+
+            background: linear-gradient(180deg, #9A27AE 0%, #EC81FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+
+            transform: rotate(0.5deg);
+        }
+
+        .title-description {
+            font-family:'Courier New', Courier, monospace;
+            font-size: 1.8rem;
+            color: #FFF;
+            margin: 1.2rem;
+        }
+
+        .title-components {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+        
+
+        .search-container {
+            background-color: #FFF;
+            padding: 1.5rem;
+            
+            border-radius: .7rem;
+            -webkit-border-radius: .7rem;
+            -moz-border-radius: .7rem;
+
+            width: 100%;
+            
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            margin-bottom: 1.2rem;
+        }
+
+        .search-box {
+            margin-left: 1rem;
+            width: 100%;
+        }
+
+        .search-box input[type="text"] {
+            outline: none;
+            font-size: 2rem;
+            
+            border: 1px solid #FFF;
+
+            width: 100%;
+        }
+
+        ::placeholder, /* Chrome, Firefox, Opera, Safari */
+        ::-ms-input-placeholder, /* Internet Explorer 10-11 */
+        :-ms-input-placeholder /* Microsoft Edge */ {
+            color: #cecece;
+            opacity: .1;
+        }
+
+        .components {
+            height: 100%;
+            width: 100%;
+            display: grid;
+            grid-template-areas: "list code viewer";
+            grid-template-columns: 25% 50% 25%;
+
+            border-radius: .7rem;
+            -webkit-border-radius: .7rem;
+            -moz-border-radius: .7rem;
+        }
+
+        .list {
+            grid-column: list;
+            background-color: #424242; /* #fbfbfb; */
+            
+            padding: 0;
+            margin: 0;
+            
+            border-radius: .7rem;
+            -webkit-border-radius: .7rem;
+            -moz-border-radius: .7rem;
+
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            -webkit-border-top-right-radius: 0;
+            -moz-border-bottom-right-radius: 0;
+        }
+
+        .component-list {
+            height: 100%;
+            overflow-y: scroll;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            font-size: 1.8rem;
+            padding: 1.2rem;
+            border-bottom: 1px solid #5a5858;
+            color: #FFF;
+            cursor: pointer;
+        }
+
+        ul li:hover {
+            color: var(--blue);
+        }
+
+        .component-active { 
+            color: var(--blue);
+        }
+        
+        .code {
+            grid-area: code;
+            height: 100%;
+
+            background-color:#000;
+            color: #FFF;
+
+            border-radius: .7rem;
+            -webkit-border-radius: .7rem;
+            -moz-border-radius: .7rem;
+
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            -webkit-border-top-left-radius: 0;
+            -moz-border-bottom-left-radius: 0;
+        }
+
+        .code-viewer {
+            padding: .8rem;
+            padding-bottom: 0;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 5% 95%;
+        }
+
+        .code-header {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .code-header-title {
+            font-size: 1.4rem;
+            background-color: #000;
+            padding: .7em 1em;
+            margin-right: .1em;
+            border: 1px solid #424242;
+            cursor: pointer;
+        }
+
+        .code-header-options {
+            border: 1px solid #424242;
+        }
+
+        .active {
+            background-color: #424242;
+            border: 1px solid #424242;
+        }
+
+        .code-editor {
+            background-color: #424242;
+            font-size: 1.4rem;
+            height: 100%;
+        }
+
+        .copy a {
+            font-size: 1.2rem;
+        }
+
+        .viewer {
+            grid-area: viewer;
+            padding: .8rem;
+            padding-bottom: 0;
+
+            background-color: #5e5e5e;
+        }
+        
+        .line {
+            display: flex;
+            flex-direction: row;
+            line-height: 2rem;
+            width: 100%;
+        }
+
+        .line-numbers {
+            color: #7b7777;
+            width: 10%;
+            text-align: right;
+            padding-right: 5px;
+        }
+        
+        .line-code {
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            word-break: normal;
+        }
+
+        .lc-tag {
+            padding: 0;
+            margin: 0;
+            color: #2196F3;
+            
+        }
+
+        .attribute {
+            color: var(--light-blue);
+        }
+
+        .attributeValue {
+            color: #96b38a;
+        }
+
+
+        .csc-alert {
+            color: #FFF;
+            background-color: #2196F3;
+            border-color: #2196F3;
+
+            position: relative;
+            padding: 1rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            font-size: 1.7rem;
+        }
+
+        .csc-badge {
+            background-color: var(--blue);
+            display: inline-block;
+            padding: 0.35em 0.65em;
+            font-weight: 700;
+            line-height: 1;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+            font-size: 1.7rem;
+        }
+
+        .csc-btn {
+            margin: 0.25rem 0.125rem;
+            cursor: pointer;
+            color: #FFF;
+            background-color: var(--blue);
+            border-color: var(--blue);
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            font-size: 1.7rem;
+        }
+
+        .csc-btn-badge {
+            font-size: 1.7rem;
+            margin: 0.25rem 0.125rem;
+            cursor: pointer;
+            color: #FFF;
+            background-color: var(--blue);
+            border-color: var(--blue);
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            position: relative!important
+        }
+
+        .csc-btn-badge span {
+            border-radius: 50%!important;
+            background-color: red;
+            padding: 0.5rem!important;
+            border-color: #f8f9fa!important;
+            border: 1px solid #dee2e6!important;
+            transform: translate(-50%,-50%)!important;
+            left: 100%!important;
+            top: 0!important;
+            position: absolute!important;
+        }
+
+        .csc-btn-badge span span {
+            position: absolute!important;
+            width: 1px!important;
+            height: 1px!important;
+            padding: 0!important;
+            margin: -1px!important;
+            overflow: hidden!important;
+            clip: rect(0,0,0,0)!important;
+            white-space: nowrap!important;
+            border: 0!important;
+        }
+
+        .csc-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: 0.25rem;
+            color: #000;
+        }
+
+        .csc-card-body {
+            flex: 1 1 auto;
+            padding: 1rem 1rem;
+            font-size: 1.7rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="title">
+            <p class="title-css">CSS Components</p>
+        </div>
+        <p class="title-description">
+            CSS Components is collection of over 1000+ already made UI components for you to integrate into your projects. You do not need any css framework or javascript library. Everything you need is provided here. Feel free to use any component in your project.
+        </p>
+        <div class="container">
+            <div class="search-container">
+                <div class="search-icon">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 490.4 490.4" style="enable-background:new 0 0 490.4 490.4; fill: #c4c5cf; width: 1.8rem;" xml:space="preserve">
+                        <g>
+                            <path d="M484.1,454.796l-110.5-110.6c29.8-36.3,47.6-82.8,47.6-133.4c0-116.3-94.3-210.6-210.6-210.6S0,94.496,0,210.796
+                                s94.3,210.6,210.6,210.6c50.8,0,97.4-18,133.8-48l110.5,110.5c12.9,11.8,25,4.2,29.2,0C492.5,475.596,492.5,463.096,484.1,454.796z
+                                M41.1,210.796c0-93.6,75.9-169.5,169.5-169.5s169.6,75.9,169.6,169.5s-75.9,169.5-169.5,169.5S41.1,304.396,41.1,210.796z"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="search-box">
+                    <input id="search-input" type="text" placeholder="Search components..." />
+                </div>
+            </div>
+            <div class="components">
+                <div class="list">
+                    <ul class="component-list">
+                        <!--
+                        <li class="component" data-value="alert">Alert</li>
+                        <li class="component" data-value="badge">Badge</li>
+                        <li class="component" data-value="breadcrumb">Breadcrumb</li>
+                        <li class="component" data-value="button">Button</li>
+                        <li class="component" data-value="button badge">Button Badge</li>
+                        <li class="component" data-value="button group">Button group</li>
+                        <li class="component" data-value="card">Card</li>
+                        <li class="component" data-value="carosuel">Carosuel</li>
+                        <li class="component" data-value="collapse">Collapse</li>
+                        <li class="component" data-value="dropdowns">Dropdowns</li>
+                        <li class="component" data-value="label">Label</li>
+                        <li class="component" data-value="list group">List group</li>
+                        <li class="component" data-value="Menu">Menu</li>
+                        <li class="component" data-value="modal">Modal</li>
+                        <li class="component" data-value="pagniation">Pagination</li>
+                        <li class="component" data-value="progress">Progress</li>
+                        <li class="component" data-value="spinners">Spinners</li>
+                        <li class="component" data-value="tooltips">Tooltips</li>
+                        -->
+                    </ul>
+                </div>
+                <div class="code">
+                    <div class="code-viewer">
+                        <div class="code-header">
+                            <div class="code-header-title active">
+                                <h3>HTML</h3>
+                            </div>
+                            <div class="code-header-title">
+                                <h3>CSS</h3>
+                            </div>
+                            <!--
+                            <div class="">
+                                <select class="code-header-options">
+                                </select>
+                            </div>
+                        -->
+                        </div>
+                        <div id="code-editor" class="code-editor">
+                        </div>
+                        <div id="code-editor-css" class="code-editor">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="viewer" class="viewer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <button class="csc-btn">button</button> -->
+    <script>
+        const componentList = document.getElementsByClassName("component-list")[0];
+        const searchInput = document.querySelector("#search-input");
+        const htmlCodeEditor = document.querySelector("#code-editor");
+        const cssCodeEditor = document.querySelector("#code-editor-css");
+        let currentComponent = {};
+
+        const viewer = document.querySelector("#viewer");
+        let templateCode = `<div class="line" role="presentation">
+                <div class="line-numbers">{{lineId}}</div>
+                <pre class="line-code" id="line-code-{{lineId}}">
+                </pre>
+            </div>`;
+
+        const componentsTemplate = [
+            { text: "Alert", name: "alert", html: `<div class="csc-alert" role="alert">\nA simple primary alert—check it out!\n</div>`, css: `.head {\n background-color: #FFF; \n color: #FFF; \n}` },
+            { text: "Badge", name: "badge", html: `<span class="csc-badge">\Badge\n</span>` },
+            { text: "Button", name: "button", html: `<button type="button" class="csc-btn">\nButton\n</button>` },
+            { text: "Button Badge", name: "button badge", html: `<button type="button" class="csc-btn-badge">\nButton with badge\n  <span>\n  <span>New alerts</span>\n</span>\n</button>` },
+            { text: "Button Group", name: "button group", html: "" },
+            { text: "Card", name: "card", html: `<div class="csc-card">\n<div class="csc-card-body">\nCard Body\n</div>\n</div>` },
+            { text: "Carousel", name: "carousel", html: "" },
+            { text: "Collapse", name: "collapse", html: "" },
+            { text: "Dropdown", name: "dropdown", html: "" },
+            { text: "Label", name: "label", html: "" },
+            { text: "List Group", name: "list group", html: "" },
+            { text: "Menu", name: "button group", html: "" },
+            { text: "Modal", name: "modal", html: "" },
+            { text: "Progress", name: "progress", html: "" },
+            { text: "Spinner", name: "spinner", html: "" },
+            { text: "Tooltip", name: "tooltip", html: "" }
+        ];
+
+        function loadComponents(ct) {
+            let componentListHTML = "";
+            for (let c of ct) {
+                componentListHTML += `<li class="component" data-value="${c.name}">${c.text}</li>`;
+            }
+            componentList.innerHTML = componentListHTML;
+            
+            const components = document.getElementsByClassName("component");
+            for (let c of components) {
+                c.addEventListener("click", (evt) => {
+                    for (let cc of components) cc.classList.remove("component-active");
+                    c.classList.add("component-active");
+
+                    const cs = ct.filter(f => f.name === c.dataset.value.toLowerCase());
+                    if (cs.length < 1) return;
+                    insertComponentHTML(cs[0].html);
+                    currentComponent = cs[0];
+                });
+            }
+        }
+
+        loadComponents(componentsTemplate);
+
+        const codeHeaderTitles = document.getElementsByClassName("code-header-title");
+        for (let cht of codeHeaderTitles) {
+            cht.addEventListener("click", (evt) => {
+                for (let c of codeHeaderTitles) {
+                    c.classList.remove("active");
+                }
+                cht.classList.add("active");
+                if (cht.childNodes[1].innerText === "HTML") {
+                    insertComponentHTML(currentComponent.html);
+                    insertExtraComponentHTML(currentComponent.options);
+                } else {
+                    insertComponentCSS(currentComponent.css);
+                }
+            });
+        }
+
+        function insertExtraComponentHTML(options) {
+            const optionComponent = document.getElementsByClassName("code-header-options")[0];
+            let optionHTML = "";
+            for(let o of options) {
+                //optionHTML 
+            }
+            optionComponent.innerHTML = optionHTML;
+        }
+
+        searchInput.addEventListener("keyup", (evt) => {
+            let comps = componentsTemplate;
+            if (evt.target.value !== "") {
+                comps = componentsTemplate.filter(c => c.text.toLowerCase().indexOf(evt.target.value.toLowerCase()) > -1);
+            }
+            loadComponents(comps);
+        });
+
+        class Parser {
+            constructor() {
+                this.symbols = [">", "<", "="];
+            }
+            isWhiteSpace(c) {
+                return c === " " || c === "";
+            }
+
+            isQuote(char) {
+                return (char === '"' || char === "'");
+            }
+
+            readUntil(char, line, stopChars) {
+                let string = "";
+                for (let c = char; c <= line.length - 1; c++) {
+                    if (stopChars.indexOf(line[c]) > -1) break;
+                    string += line[c];
+                    char = c;
+                }
+                return [string, char++];
+            }
+
+            getCode(c, val) {
+                switch (c) {
+                    case "<": return { type: "lt", html: '<span class="lc-tag tag">&lt</span>' };
+                    case "</": return { type: "lt", html: '<span class="lc-tag tag">&lt/</span>' };
+                    case ">": return { type: "gt", html: '<span class="lc-tag tag">&gt</span>' };
+                    case "=": return { type: "eq", html: "=" };
+                    /************************************* HTML tags **************************************/
+                    case "button": return { type: "element", html: '<span class="lc-tag tag">button</span>' };
+                    case "ul": return { type: "element", html: '<span class="lc-tag tag">ul</span>' };
+                    case "li": return { type: "element", html: '<span class="lc-tag tag">li</span>' };
+                    case "table": return { type: "element", html: '<span class="lc-tag tag">table</span>' };
+                    case "tr": return { type: "element", html: '<span class="lc-tag tag">tr</span>' };
+                    case "td": return { type: "element", html: '<span class="lc-tag tag">td</span>' };
+                    case "th": return { type: "element", html: '<span class="lc-tag tag">th</span>' };
+                    case "tfoot": return { type: "element", html: '<span class="lc-tag tag">tfoot</span>' };
+                    case "tbody": return { type: "element", html: '<span class="lc-tag tag">tbody</span>' };
+                    case "textarea": return { type: "element", html: '<span class="lc-tag tag">textarea</span>' };
+                    case "svg": return { type: "element", html: '<span class="lc-tag tag">svg</span>' };
+                    case "p": return { type: "element", html: '<span class="lc-tag tag">p</span>' };
+                    case "nav": return { type: "element", html: '<span class="lc-tag tag">nav</span>' };
+                    case "img": return { type: "element", html: '<span class="lc-tag tag">img</span>' };
+                    case "iframe": return { type: "element", html: '<span class="lc-tag tag">iframe</span>' };
+                    case "h1": return { type: "element", html: '<span class="lc-tag tag">h1</span>' };
+                    case "h2": return { type: "element", html: '<span class="lc-tag tag">h2</span>' };
+                    case "h3": return { type: "element", html: '<span class="lc-tag tag">h3</span>' };
+                    case "h4": return { type: "element", html: '<span class="lc-tag tag">h4</span>' };
+                    case "h5": return { type: "element", html: '<span class="lc-tag tag">h5</span>' };
+                    case "h6": return { type: "element", html: '<span class="lc-tag tag">h6</span>' };
+                    case "div": return { type: "element", html: '<span class="lc-tag tag">div</span>' };
+                    case "br": return { type: "element", html: '<span class="lc-tag tag">br</span>' };
+                    case "a": return { type: "element", html: '<span class="lc-tag tag">a</span>' };
+                    case "input": return { type: "element", html: '<span class="lc-tag tag">input</span>' };
+                    case "span": return { type: "element", html: '<span class="lc-tag tag">span</span>' };
+                    /************************************* End HTML tags **************************************/
+
+                    case "value": return { type: "attribute", html: '<span class="lc-tag attribute">value</span>' };
+                    case "href": return { type: "attribute", html: '<span class="lc-tag attribute">href</span>' };
+                    case "role": return { type: "attribute", html: '<span class="lc-tag attribute">href</span>' };
+                    case "type": return { type: "attribute", html: '<span class="lc-tag attribute">type</span>' };
+                    case "class": return { type: "attribute", html: '<span class="lc-tag attribute">class</span>' };
+                    case "string": return { type: "string", html: `<span class="lc-string">${val}</span> ` };
+                    case "whitespace": return { type: "whitespace", html: " " };
+                    case "attribute": return { type: "attributeValue", html: `<span class="lc-tag attributeValue">"${val}"</span>` };
+                    default: return c;
+                }
+            }
+
+            parse(lines) {
+                const lineNumbers = [];
+                let lineIndex = 1;
+                for (let line of lines) {
+                    line = line.trim();
+                    let string = "";
+                    let tree = [];
+                    let openTagsLevels = [];
+
+                    for (let char = 0; char <= line.length - 1; char++) {
+                        let tc = {};
+
+                        if (this.isWhiteSpace(line[char])) {
+                            tc = this.getCode("whitespace");
+                        }
+                        else if (this.isQuote(line[char])) {
+                            let [s, index] = this.readUntil(++char, line, ['"', "'"]);
+                            char = ++index;
+                            tc = this.getCode("attribute", s);
+                        } else if (this.symbols.includes(line[char])) {
+                            let v = line[char];
+                            if (v === "<") openTagsLevels.push(1);
+                            if (v === ">") openTagsLevels.pop();
+                            if (`${line[char]}${line[char + 1]}` === "</") {
+                                v = `${line[char]}${line[char + 1]}`;
+                                char += 1;
+                            }
+                            tc = this.getCode(v);
+                        } else {
+                            let [s, index] = this.readUntil(char, line, [" ", "<", ">", "="]);
+                            char = index;
+                            tc = openTagsLevels.length > 0 ? this.getCode(s) : this.getCode("string", s);
+                            string = s;
+                        }
+                        
+                        if (typeof tc === "string" && tc === string) {
+                           tc = { type: "string", html: tc };
+                        };
+                        
+                        string = "";
+                        tree.push(tc);
+                    }
+                    lineNumbers.push({ line: lineIndex, html: tree });
+                    lineIndex++;
+                }
+                return lineNumbers;
+            }
+        }
+
+        function convertTreeToHTML(tree) {
+            let html = "&nbsp;";
+            for(let b in tree) {
+                let branch = tree[b];
+                html += `${branch.html}`;
+            }
+            return html;
+        }
+
+        function insertComponentHTML(html) {
+            document.querySelector("#code-editor").innerHTML = "";
+            
+            let lines = html.split("\n");
+            const p = new Parser();
+            const htmlLines = p.parse(lines);
+            for (let hl in htmlLines) {
+                let htmlLine = htmlLines[hl];
+                let tc = templateCode;
+                htmlCodeEditor.innerHTML += tc.replace(/{{lineId}}/g, ++hl);
+
+                let lineCode = document.querySelector(`#line-code-${hl}`);
+                lineCode.innerHTML = convertTreeToHTML(htmlLine.html);
+                viewer.innerHTML = html;
+            }
+        }
+
+        function insertComponentCSS(css) {
+            document.querySelector("#code-editor").innerHTML = "";
+            
+            let lines = css.split("\n");
+            /* 
+            const p = new Parser();
+            const htmlLines = p.parse(lines);
+            for (let hl in htmlLines) {
+                let htmlLine = htmlLines[hl];
+                let tc = templateCode;
+                htmlCodeEditor.innerHTML += tc.replace(/{{lineId}}/g, ++hl);
+
+                let lineCode = document.querySelector(`#line-code-${hl}`);
+                lineCode.innerHTML = convertTreeToHTML(htmlLine.html);
+                viewer.innerHTML = html;
+            }
+            */
+            htmlCodeEditor.innerHTML = lines;
+        }
+        insertComponentCSS
+    </script>
+</body>
+</html>
